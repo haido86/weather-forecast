@@ -16,27 +16,48 @@ const City = ({ city }) => {
   };
 
   return (
-    <div style={{ padding: '5px', marginTop: '5px' }}>
-      <div>City </div>
-
-      <div>
-        {city.EnglishName}
-        {city.AdministrativeArea.EnglishName}
-        {city.Country.EnglishName}
+    <div
+      style={{
+        width: '16rem',
+        margin: '10px',
+      }}
+      className="card"
+    >
+      <div className="card-body">
+        <span style={{ fontWeight: 'bold', fontSize: '24px' }}>
+          {city.EnglishName}{' '}
+        </span>
+        <span>{city.AdministrativeArea.ID} </span>
+        <span style={{ backgroundColor: 'orange' }}>{city.Country.ID}</span>
         {!forecasts ? (
-          <button onClick={handleClick}>Show Weather Detail</button>
+          <button className="btn btn-primary" onClick={handleClick}>
+            Show Weather Detail
+          </button>
         ) : (
           forecasts.DailyForecasts.map((forecast, index) => {
             return (
               <div key={index}>
-                <div>{forecast.Temperature.Maximum.Value}</div>
+                <div>
+                  <span style={{ fontWeight: 'bold', fontSize: '40px' }}>
+                    {forecast.Temperature.Maximum.Value}
+                  </span>
+                  <span> °C</span>
+                </div>
                 <img
                   alt="weather-icon"
                   src={`https://apidev.accuweather.com/developers/Media/Default/WeatherIcons/${forecast.Day.Icon}-s.png`}
                 />
-                <div>
-                  {forecast.Day.PrecipitationIntensity}
-                  {forecast.Day.PrecipitationType}
+                <div
+                  style={{
+                    margin: '10px',
+                    fontWeight: 'bold',
+                    color: 'grey',
+                  }}
+                >
+                  <span>
+                    {forecast.Day.PrecipitationIntensity.toUpperCase()}{' '}
+                  </span>
+                  <span>{forecast.Day.PrecipitationType.toUpperCase()}</span>
                 </div>
               </div>
             );
