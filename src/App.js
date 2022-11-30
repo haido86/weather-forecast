@@ -1,25 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import axios from 'axios';
+import { api_key } from './lib/api';
+import City from './components/City';
 
-function App() {
+const App = () => {
+  const [cityName, setCityName] = useState('');
+  const [cities, setCities] = useState([]);
+
+  const handleChange = event => {
+    // TODO: validation , check empty...
+    // TODO: show error
+    event.preventDefault();
+    setCityName(event.target.value);
+  };
+
+  const handleClick = () => {
+    axios
+      .get(
+        `http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${api_key}&q=${cityName}`
+      )
+      .then(response => {
+        setCities(response.data);
+      });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div>Weather Forecast</div>
+
+      <input
+        type="text"
+        id="name"
+        placeholder="Enter the name of the city"
+        onChange={handleChange}
+        value={cityName}
+      />
+
+      <button onClick={handleClick} disabled={!cityName}>
+        Show Weather info
+      </button>
+
+      <div>
+        {cities?.map(city => {
+          return <City key={city.Key} city={city} />;
+        })}
+      </div>
     </div>
   );
-}
+};
 
 export default App;
