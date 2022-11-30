@@ -53,18 +53,6 @@ const App = () => {
         </button>
       </div>
 
-      {/* <input
-        type="text"
-        id="name"
-        placeholder="Enter the name of the city"
-        onChange={handleChange}
-        value={cityName}
-      />
-
-      <button onClick={handleClick} disabled={!cityName}>
-        Show Weather info
-      </button> */}
-
       <div>
         {cities?.map(city => {
           return <City key={city.Key} city={city} />;
