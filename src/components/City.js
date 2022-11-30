@@ -8,7 +8,7 @@ const City = ({ city }) => {
   const handleClick = () => {
     axios
       .get(
-        `http://dataservice.accuweather.com/forecasts/v1/daily/1day/${city.Key}?apikey=${api_key}&metric=true`
+        `https://dataservice.accuweather.com/forecasts/v1/daily/1day/${city.Key}?apikey=${api_key}&metric=true`
       )
       .then(response => {
         setForecasts(response.data);

@@ -17,7 +17,7 @@ const App = () => {
   const handleClick = () => {
     axios
       .get(
-        `http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${api_key}&q=${cityName}`
+        `https://dataservice.accuweather.com/locations/v1/cities/search?apikey=${api_key}&q=${cityName}`
       )
       .then(response => {
         setCities(response.data);
